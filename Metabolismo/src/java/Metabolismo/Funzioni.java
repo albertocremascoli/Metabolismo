@@ -9,9 +9,15 @@ import javax.jws.WebService;
  */
 @WebService()
 public class Funzioni {
-    @WebMethod(operationName="Somma")
-    public int somma(int i, int a, int c){
+    @WebMethod(operationName="Addizione")
+    public int addizione(int i, int a, int c){
         int somma=i+a+c;
         return somma;
+    }
+    
+    @WebMethod(operationName="Sottrazione")
+    public int sottrazione(int i, int a, int c){
+        int sottrazione=i-a-c;
+        return sottrazione;
     }
 }
