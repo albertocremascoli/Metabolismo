@@ -21,40 +21,67 @@ public class Funzioni {
         int somma=i+a;
         return somma;
     }
-
-    @WebMethod(operationName="Sottrazione")
-    public int sottrazione(int i, int a){
-        int sottrazione=i-a;
-        return sottrazione;
-    }
-
-    @WebMethod(operationName="Moltiplicazione")
-    public int moltiplicazione(int i, int a){
-        int moltiplicazione=i*a;
-        return moltiplicazione;
-    }
-
-    @WebMethod(operationName="Divisione")
-    public float divisione(int i, int a){
-        float divisione=i/a;
-        return divisione;
-    }
-
-    @WebMethod(operationName="Potenza")
-    public int potenza(int num){
-      return num*num;
-    }
     */
-    @WebMethod(operationName="riceviDati")
-    public void riceviDati(String nome, String cognome, float peso){
+    @WebMethod(operationName="riceviDatiPersona")
+    public void riceviDatiPersona(String nome, String cognome, float peso){
      try {
-         
-        // java.util.Date utilDate = new java.util.Date();
-         /*
-        java.sql.Date sqlDate = new java.sql.Date(dataN.getTime());
-        System.out.println("utilDate:" + dataN);
-        System.out.println("sqlDate:" + sqlDate);
-        */
+            System.out.println("Connetto Database");
+            String driver = "org.apache.derby.jdbc.ClientDriver";
+            Class.forName(driver);
+            System.out.println("Eseguo Query");
+            try {                
+                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Metabolismo","Andrea","andrea");              
+                Statement sta = con.createStatement();
+                sta.executeUpdate("insert into PERSONA(COGNOME, NOME, PESO)"
+                        + "values('"+cognome+"','"+nome+"',"+peso+")");
+        }catch (SQLException SQLexc){
+            SQLexc.printStackTrace();}
+            }catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }  
+    }
+    
+    @WebMethod(operationName="riceviDatiAlimento")
+    public void riceviDatiAlimento(String nome, boolean tipo){
+     try {
+            System.out.println("Connetto Database");
+            String driver = "org.apache.derby.jdbc.ClientDriver";
+            Class.forName(driver);
+            System.out.println("Eseguo Query");
+            try {                
+                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Metabolismo","Andrea","andrea");              
+                Statement sta = con.createStatement();
+                sta.executeUpdate("insert into ALIMENTO(NOME, TIPO)"
+                        + "values('"+nome+"',"+tipo+",)");
+        }catch (SQLException SQLexc){
+            SQLexc.printStackTrace();}
+            }catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }  
+    }
+    
+    @WebMethod(operationName="riceviDatiProdotti")
+    public void riceviDatiProdotti(boolean tipo){
+     try {
+            System.out.println("Connetto Database");
+            String driver = "org.apache.derby.jdbc.ClientDriver";
+            Class.forName(driver);
+            System.out.println("Eseguo Query");
+            try {                
+                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Metabolismo","Andrea","andrea");              
+                Statement sta = con.createStatement();
+                sta.executeUpdate("insert into PRODOTTI(TIPO)"
+                        + "values("+tipo+")"); 
+        }catch (SQLException SQLexc){
+            SQLexc.printStackTrace();}
+            }catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }  
+    }
+    //da finire
+    @WebMethod(operationName="riceviDatiAttivita")
+    public void riceviDatiAttivita(String nome, String cognome, float peso){
+     try {
             System.out.println("Connetto Database");
             String driver = "org.apache.derby.jdbc.ClientDriver";
             Class.forName(driver);
